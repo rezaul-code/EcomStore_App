@@ -1,0 +1,54 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seller Sign Up | EcomStore</title>
+  <link rel="stylesheet" href="css/seller/seller-style.css">
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <div class="logo">Seller Panel</div>
+        <button id="theme-toggle" class="btn">🌙 Dark Mode</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="form-container">
+        <h2>Seller Sign Up</h2>
+        <form action="seller_signup" method="post">
+        
+        
+          <input type="text" name="name" placeholder="Full Name" required>
+          <input type="email" name="email" placeholder="Email Address" required>
+          <input type="password" name="password" placeholder="Password" required>
+          <input type="text" name="shop_name" placeholder="Shop Name" required>
+          <input type="text" name="phone" placeholder="Phone Number" required>
+          <textarea name="address" placeholder="Address" rows="3" required></textarea>
+          
+          <button type="submit">Register</button>
+          
+          
+        </form>
+        <div class="message">
+          ${msg}
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 EcomStore Seller Panel. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/theme-toggle.js"></script>
+</body>
+</html>

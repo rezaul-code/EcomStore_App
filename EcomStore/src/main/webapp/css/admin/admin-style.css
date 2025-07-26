@@ -108,7 +108,7 @@ header {
 }
 
 .login-form button:hover {
-  background-color: #e0a800;
+  background-color: rgb(64, 128, 128);
 }
 
 /* Footer */

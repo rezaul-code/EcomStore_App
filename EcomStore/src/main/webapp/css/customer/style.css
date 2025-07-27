@@ -9,28 +9,18 @@ html, body {
   height: 100%;
   font-family: 'Segoe UI', sans-serif;
   background-color: #f9f9f9;
+  color: #333;
 }
 
 a {
   text-decoration: none;
 }
 
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 0 20px;
-}
-
-/* === Sticky Layout === */
+/* === Layout Wrapper === */
 .page-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.main-content {
-  flex: 1;
-  padding: 20px 0;
 }
 
 /* === Header === */
@@ -44,6 +34,9 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
 }
 
 .logo {
@@ -54,7 +47,7 @@ header {
 
 .nav-links a {
   color: #fff;
-  margin: 0 12px;
+  margin-left: 15px;
   font-weight: 500;
   transition: color 0.3s;
 }
@@ -63,29 +56,152 @@ header {
   color: #f4c10f;
 }
 
+/* === Search Bar === */
 .search-bar {
   display: flex;
-  align-items: center;
+  gap: 8px;
 }
 
 .search-bar input {
   padding: 6px 10px;
-  border: none;
-  border-radius: 4px 0 0 4px;
-  outline: none;
-  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .search-bar button {
-  padding: 6px 12px;
   background-color: #f4c10f;
   border: none;
-  border-radius: 0 4px 4px 0;
+  padding: 6px 12px;
+  border-radius: 4px;
   cursor: pointer;
+}
+
+/* === Form Container (Login/Signup) === */
+.form-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.form-box {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.form-box h2 {
+  margin-bottom: 25px;
+  font-size: 22px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   font-size: 14px;
 }
 
-/* === Footer (Compact Half-Height) === */
+.button {
+  background-color: #f4c10f;
+  color: #000;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #d9aa00;
+}
+
+/* === Dashboard Main Section === */
+.main-content {
+  flex: 1;
+  padding: 30px 20px;
+  background-color: #fafafa;
+}
+
+.welcome-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.main-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.section-group {
+  background-color: #fff;
+  padding: 20px 25px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  min-width: 200px;
+  max-width: 260px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-group:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-group h3 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #1a1a1a;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button-group a {
+  display: inline-block;
+  background-color: #f4c10f;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.button-group a:hover {
+  background-color: #d9aa00;
+}
+
+/* === Footer === */
 footer {
   background-color: #2c2c2c;
   color: #fff;
@@ -116,7 +232,6 @@ footer {
 .footer-section a {
   display: block;
   color: #ddd;
-  text-decoration: none;
   margin-bottom: 4px;
   font-size: 12px;
   transition: color 0.3s;
@@ -133,3 +248,72 @@ footer {
   color: #bbb;
   border-top: 1px solid #444;
 }
+
+
+/* === Auth Form (Login/Signup) === */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.auth-form {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1a1a1a;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="tel"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.auth-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #f4c10f;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+  background-color: #d9aa00;
+}
+
+
+.dashboard-main {
+  flex: 1;
+  padding: 40px 0;
+  background-color: #f9f9f9;
+}
+
+.dashboard-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+

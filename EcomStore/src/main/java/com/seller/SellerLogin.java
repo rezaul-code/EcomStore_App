@@ -24,23 +24,24 @@ public class SellerLogin extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String username = request.getParameter("username");
+		String name = request.getParameter("name");
 		String password = request.getParameter("password");
 		
 		DBService serobj = new DBService();
-		String sellerName = serobj.adminLogin(username, password);
+		String sellerName = serobj.sellerLogin(name, password);
 		
 		if (sellerName != null) {
 			
 			request.getSession().setAttribute("seller", sellerName);
 			
+			response.sendRedirect(request.getContextPath() + "/seller/sellerdashbord");
 			
-			RequestDispatcher	rs = request.getRequestDispatcher("/seller/sellerdashbord.jsp");
-			rs.forward(request, response);
 		}else {
-			 RequestDispatcher rs = request.getRequestDispatcher("/seller/seller_login.jsp");
-			 rs.forward(request, response);
+		    request.setAttribute("msg", "Invalid username or password");
+		    RequestDispatcher rs = request.getRequestDispatcher("/seller/seller_login.jsp");
+		    rs.forward(request, response);
 		}
+
 		
 	}
 

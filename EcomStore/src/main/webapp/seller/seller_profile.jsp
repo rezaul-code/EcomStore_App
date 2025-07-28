@@ -1,10 +1,11 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seller Dashboard | EcomStore</title>
+  <title>Seller profile | EcomStore</title>
   <!-- Proper dynamic path for CSS -->
   <link rel="stylesheet" href="<c:url value='/css/seller/seller-style.css' />">
 </head>
@@ -34,10 +35,42 @@
       </ul>
     </aside>
 
+
+
+
+    
     <main class="dashboard-content">
-      <h2>Welcome, ${sellerName}!</h2>
-      <p>This is your seller dashboard. Use the menu to manage your products, view orders, and update your profile.</p>
-    </main>
+  <div class="profile-section">
+    <h2>My Profile</h2>
+    <hr/>
+
+    <c:choose>
+      <c:when test="${not empty sellerProfile}">
+        <c:forEach var="seller" items="${sellerProfile}">
+          <div class="profile-card">
+            <p><strong>Name:</strong> ${seller.name}</p>
+            <p><strong>Email:</strong> ${seller.email}</p>
+            <p><strong>Shop Name:</strong> ${seller.shop_name}</p>
+            <p><strong>Phone:</strong> ${seller.phone}</p>
+            <p><strong>Address:</strong> ${seller.address}</p>
+          </div>
+        </c:forEach>
+      </c:when>
+      <c:otherwise>
+        <p>No seller profile data found.</p>
+      </c:otherwise>
+    </c:choose>
+  </div>
+</main>
+    
+    
+    
+      
+      
+   
+  
+    
+    
   </div>
 
   <!-- Footer -->

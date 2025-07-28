@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.database_connection.DatabaseConnection;
 import com.dto.CustomerDTO;
@@ -11,6 +13,57 @@ import com.dto.SellerDTO;
 
 
 public class DBService {
+	
+	
+	public List<SellerDTO> sellerProfile(String username) {
+		
+		Connection con = DatabaseConnection.getConnection();
+		List<SellerDTO> sellerD = new ArrayList<SellerDTO>();
+		String query = QueryClass.seller_getDetails_query;
+		
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, username);
+			
+			ResultSet rs =  ps.executeQuery();
+			
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				String password = rs.getString("password");
+				String shop_name = rs.getString("shop_name");
+				String phone = rs.getString("phone");
+				String address = rs.getString("address");
+				
+				SellerDTO seller = new SellerDTO();
+	            seller.setName(name);
+	            seller.setEmail(email);
+	            seller.setPassword(password);
+	            seller.setShop_name(shop_name);
+	            seller.setPhone(phone);
+	            seller.setAddress(address);
+
+	            sellerD.add(seller);
+			
+			}
+			
+					
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
+		return sellerD;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public String CustomerLogin(String username, String password) {

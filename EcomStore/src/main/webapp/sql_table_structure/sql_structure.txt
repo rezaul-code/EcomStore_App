@@ -1,8 +1,8 @@
-create table product(
-id int auto_increment primary key,
-name varchar(50) not null,
-description varchar(300),
-category varchar(50)not null,
-price int(50) not null,
-img_path varchar(50) 
-)auto_increment =1000;
+CREATE TABLE product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(300),
+    category VARCHAR(50) NOT NULL,
+    price INT NOT NULL,
+    img_path VARCHAR(50)
+) AUTO_INCREMENT=1000;

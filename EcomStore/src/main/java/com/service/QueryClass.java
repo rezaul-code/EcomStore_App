@@ -11,6 +11,9 @@ public class QueryClass {
 	public static String user_insert_query = "INSERT INTO customer (name, email, password, phone, address) VALUES (?, ?, ?, ?, ?)";
 	public static String user_check_query = "select * from customer where name = ? and password = ?";
 	
+	public static String product_insert_query = "Insert into product (name,description,category,price)values (?,?,?,?)";
+			
+	public static String product_update_query = "UPDATE product SET img_path = ? WHERE id = ?";
 	
 	
 	

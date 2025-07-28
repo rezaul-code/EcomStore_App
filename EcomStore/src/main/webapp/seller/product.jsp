@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seller Dashboard | EcomStore</title>
+  <title>Add Product | EcomStore</title>
   <!-- Proper dynamic path for CSS -->
   <link rel="stylesheet" href="<c:url value='/css/seller/seller-style.css' />">
 </head>
@@ -23,22 +23,44 @@
     </div>
   </header>
 
-  <!-- Sidebar + Main -->
-  <div class="dashboard-wrapper">
-    <aside class="sidebar">
-      <ul>
-        <li><a href="<c:url value='/seller/add_product' />">Add Product</a></li>
-        <li><a href="<c:url value='/seller/view_products.jsp' />">My Products</a></li>
-        <li><a href="<c:url value='/seller/orders.jsp' />">Orders</a></li>
-        <li><a href="<c:url value='/seller/profile.jsp' />">Profile</a></li>
-      </ul>
-    </aside>
-
-    <main class="dashboard-content">
-      <h2>Welcome, ${sellerName}!</h2>
-      <p>This is your seller dashboard. Use the menu to manage your products, view orders, and update your profile.</p>
+  
+  <main class="main-content">
+      <div class="form-container">
+        <h2>Add Product</h2>
+        <form action="add_product" method="post">
+        
+        
+          <input type="text" name="p_name" placeholder="enter product name" required>
+          <input type="text" name="p_description" placeholder="describe" required>
+          <select name="category">
+    <option value="books">Books</option>
+    <option value="electronics">Electronics</option>
+    <option value="clothing">Clothing</option>
+</select>
+          
+          <input type="text" name="p_price" placeholder="enter product price" required>
+          
+          
+          <button type="submit">Submit</button>
+          
+          
+        </form>
+        
+        
+        
+      </div>
+      
+      <div>${ msg} </div>
     </main>
-  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   <!-- Footer -->
   <footer>

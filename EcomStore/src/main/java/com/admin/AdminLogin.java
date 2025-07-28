@@ -32,9 +32,8 @@ if (adminName != null) {
 			
 			request.getSession().setAttribute("admin", adminName);
 			
-			
-			RequestDispatcher	rs = request.getRequestDispatcher("/admin/admindashbord.jsp");
-			rs.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/admin/admindashbord");
+	        
 		}else {
 			 RequestDispatcher rs = request.getRequestDispatcher("/admin/admin_login.jsp");
 			 rs.forward(request, response);

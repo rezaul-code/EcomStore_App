@@ -1,10 +1,17 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Seller Sign Up | EcomStore</title>
-  <link rel="stylesheet" href="css/seller/seller-style.css">
+  <title>Seller login | EcomStore</title>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="<c:url value='/css/seller/seller-style.css' />">
+
+
+
 </head>
 <body>
 
@@ -12,7 +19,7 @@
     <!-- Header -->
     <header>
       <div class="header-container">
-        <div class="logo">Seller Panel</div>
+        <div class="logo">EcomStore</div>
         <button id="theme-toggle" class="btn">🌙 Dark Mode</button>
       </div>
     </header>
@@ -23,17 +30,15 @@
       <div class="admin-dashboard">
       
         <h2>Seller Login</h2>
+       
+       
         <form action="seller_login" method="post" class="login-form">
-          <input type="text" name="username" placeholder="Username" required />
+          <input type="text" name="name" placeholder="name" required />
           <input type="password" name="password" placeholder="Password" required />
           <button type="submit">Login</button>
-          
-          
-          <div style="margin-top: 10px; color: red;">
-            ${msg}
-          </div>
-        </form>
         
+        <h2>${msg}</h2>
+        </form>
         
       </div>
     </main>

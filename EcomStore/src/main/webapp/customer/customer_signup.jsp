@@ -1,13 +1,16 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EcomStore</title>
-  <link rel="stylesheet" href="css/style.css"/>
+  <title>Customer Sign Up | EcomStore</title>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customer/style.css">
 </head>
 <body>
   <div class="page-wrapper">
+    
     <!-- Header -->
     <header>
       <div class="container header-container">
@@ -17,7 +20,6 @@
           <a href="products.jsp">Products</a>
           <a href="about.jsp">About</a>
           <a href="contact.jsp">Contact</a>
-          <a href="logout.jsp">Logout</a>
         </nav>
         <form action="search" method="get" class="search-bar">
           <input type="text" name="query" placeholder="Search products..." />
@@ -26,11 +28,19 @@
       </div>
     </header>
 
-    <!-- Main content -->
+    <!-- Main Content -->
     <main class="main-content">
-      <div class="container">
-        <h1>Welcome to EcomStore</h1>
-        <p>Start exploring products now.</p>
+      <div class="container auth-container">
+        <form class="auth-form" action="user_signup" method="post">
+          <h2>Create Account</h2>
+          <input type="text" name="name" placeholder="Full Name" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="password" name="password" placeholder="Password" required />
+          <input type="text" name="phone" placeholder="Phone Number" required />
+          <input type="text" name="address" placeholder="Address" required />
+          <button type="submit">Sign Up</button>
+          <h2>${sts}</h2>
+        </form>
       </div>
     </main>
 
@@ -60,6 +70,7 @@
         &copy; 2025 EcomStore. All rights reserved.
       </div>
     </footer>
+    
   </div>
 </body>
 </html>

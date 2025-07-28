@@ -12,7 +12,7 @@
     <!-- Header -->
     <header>
       <div class="header-container">
-        <div class="logo">Seller Panel</div>
+        <div class="logo">EcomStore</div>
         <button id="theme-toggle" class="btn">🌙 Dark Mode</button>
       </div>
     </header>

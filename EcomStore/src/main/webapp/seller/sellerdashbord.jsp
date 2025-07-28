@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Seller Dashboard | EcomStore</title>
-  <link rel="stylesheet" href="css/seller/seller-dashboard.css">
+  <!-- Proper dynamic path for CSS -->
+  <link rel="stylesheet" href="<c:url value='/css/seller/seller-style.css' />">
 </head>
 <body>
 
@@ -12,10 +14,11 @@
   <!-- Header -->
   <header>
     <div class="header-container">
-      <div class="logo">Seller Dashboard</div>
+      <div class="logo">EcomStore</div>
       <div class="header-actions">
+      <h3>Welcome ${seller}</h3>
         <button id="theme-toggle" class="btn">🌙 Dark Mode</button>
-        <a href="seller_logout" class="btn logout-btn">Logout</a>
+        <a href="<c:url value='/logout?role=seller' />" class="btn logout-btn">Logout</a>
       </div>
     </div>
   </header>
@@ -24,10 +27,10 @@
   <div class="dashboard-wrapper">
     <aside class="sidebar">
       <ul>
-        <li><a href="add_product.jsp">Add Product</a></li>
-        <li><a href="view_products.jsp">My Products</a></li>
-        <li><a href="orders.jsp">Orders</a></li>
-        <li><a href="profile.jsp">Profile</a></li>
+        <li><a href="<c:url value='/seller/add_product.jsp' />">Add Product</a></li>
+        <li><a href="<c:url value='/seller/view_products.jsp' />">My Products</a></li>
+        <li><a href="<c:url value='/seller/orders.jsp' />">Orders</a></li>
+        <li><a href="<c:url value='/seller/profile.jsp' />">Profile</a></li>
       </ul>
     </aside>
 
@@ -43,6 +46,7 @@
   </footer>
 </div>
 
-<script src="js/theme-toggle.js"></script>
+<!-- JS with proper dynamic path -->
+<script src="<c:url value='/js/theme-toggle.js' />"></script>
 </body>
 </html>

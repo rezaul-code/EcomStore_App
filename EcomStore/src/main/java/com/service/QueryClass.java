@@ -22,6 +22,8 @@ public class QueryClass {
 	// Admin Panel
 	public static String product_getDetails_query = "select * from product ";
 	
+	public static String product_status_update = "UPDATE product SET status = ? WHERE id = ?";
+	
 	
 	
 }

@@ -40,6 +40,8 @@
           <th>Price</th>
           <th>Image</th>
           <th>Status</th>
+          <th>Action</th>
+          <th>Submit</th>
         </tr>
       </thead>
       <tbody>
@@ -54,11 +56,28 @@
               <img src="${pageContext.request.contextPath}/${product.p_img}" alt="Product Image" width="60" height="60">
             </td>
             <td>${product.p_status}</td>
+            
+            <td>
+            
+            <form action="manage_product" method="get">
+            	<input type="hidden" name="p_id" value="${product.p_id}">
+            	<select name="action">
+            	<option value="Approved">Approve</option>
+            	<option value="Unapproved">Un-approve</option>
+            	</select>
+            
+            
+            </td>
+            <td><button>Go</button>  </td>
+            </form>
           </tr>
         </c:forEach>
+        
       </tbody>
     </table>
   </div>
+  
+  <div>${msg } </div>
 </main>
     
     

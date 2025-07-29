@@ -12,6 +12,26 @@ import com.dto.ProductDto;
 
 public class ProductService {
 	
+	
+	public int updateProductStatus(int id ,String action) {
+		
+		Connection connection = DatabaseConnection.getConnection();
+		String product_status_update = QueryClass.product_status_update;
+		int rows =0;
+		try {
+			PreparedStatement ps = connection.prepareStatement(product_status_update);
+			ps.setString(1, action);
+			ps.setInt(2, id);
+			rows = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rows ;
+		
+	}
+	
 	public int isertProduct(ProductDto dto) {
 		
 		Connection connection = DatabaseConnection.getConnection();

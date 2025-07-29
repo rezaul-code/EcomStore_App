@@ -144,3 +144,89 @@ footer {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+
+.main-content {
+  padding: 40px;
+  background-color: #ecf0f3; /* Matches light body tone */
+  min-height: 85vh;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.main-content h2 {
+  margin-bottom: 25px;
+  font-size: 30px;
+  color: #2c3e50;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Table Styling */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.product-table thead {
+  background-color: #2c3e50;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.product-table th,
+.product-table td {
+  padding: 14px 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #2c3e50;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.product-table tbody tr:hover {
+  background-color: #f4f8fb;
+  transition: 0.2s ease-in-out;
+}
+
+.product-table img {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}
+
+/* Status badge styles */
+.product-table td.status-approved {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+.product-table td.status-unapproved {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+
+.product-table th {
+  background-color: #2c3e50;
+  color: #ffffff;
+}
+
+.product-table td {
+  background-color: #34495e; /* Slightly lighter than header */
+  color: #ffffff; /* ✅ fix: make text white for visibility */
+  font-size: 14px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #3e5a70;
+}
+
+.product-table tbody tr:nth-child(even) td {
+  background-color: #3e5a70;
+}
+

@@ -8,6 +8,14 @@ public class ProductDto {
 	String p_category;
 	int p_price;
 	String p_img;
+	String p_status;
+	
+	public String getP_status() {
+		return p_status;
+	}
+	public void setP_status(String p_status) {
+		this.p_status = p_status;
+	}
 	public int getP_id() {
 		return p_id;
 	}

@@ -11,16 +11,17 @@
 </head>
 <body>
   <div class="page-wrapper">
+  
     <!-- Header -->
     <header>
       <div class="header-container">
         <div class="logo">EcomStore</div>
+        <h3>Welcome ${customer}</h3>
         <nav class="nav-links">
           <a href="<c:url value='/customer/home.jsp' />">Home</a>
           <a href="<c:url value='/customer/products.jsp' />">Products</a>
           <a href="<c:url value='/customer/orders.jsp' />">My Orders</a>
           <a href="<c:url value='/logout?role=user' />">Logout</a>
-          <h3>Welcome ${customer}</h3>
         </nav>
         <form action="<c:url value='/search' />" method="get" class="search-bar">
           <input type="text" name="query" placeholder="Search products..." />
@@ -33,9 +34,29 @@
     <main class="dashboard-main">
       <div class="container">
         <div class="dashboard-box">
-          <h1>Welcome,${name}</h1>
-          <p>This is your customer dashboard.</p>
-          <p>From here, you can manage your orders, view your profile, and more.</p>
+        
+          <div class="product-section">
+            <h2>Explore Our Products</h2>
+            <c:choose>
+              <c:when test="${empty pList}">
+                <p style="text-align:center; font-size:18px;">No products available right now. Please check back later.</p>
+              </c:when>
+              <c:otherwise>
+                <div class="product-grid">
+                  <c:forEach var="p" items="${pList}">
+                    <div class="product-card">
+                      <img src="${pageContext.request.contextPath}/${p.p_img}" alt="${p.p_name}" />
+                      <h3>${p.p_name}</h3>
+                      <p>${p.p_description}</p>
+                      <p><strong>₹ ${p.p_price}</strong></p>
+                      <button>Add to Cart</button>
+                    </div>
+                  </c:forEach>
+                </div>
+              </c:otherwise>
+            </c:choose>
+          </div>
+        
         </div>
       </div>
     </main>
@@ -63,6 +84,7 @@
         &copy; 2025 EcomStore. All rights reserved.
       </div>
     </footer>
+  
   </div>
 </body>
 </html>

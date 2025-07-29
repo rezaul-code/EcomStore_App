@@ -54,13 +54,6 @@
     </main>
   
   
-  
-  
-  
-  
-  
-  
-  
 
   <!-- Footer -->
   <footer>

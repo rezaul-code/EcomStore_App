@@ -24,4 +24,10 @@ public class QueryClass {
 	
 	
 	
+	
+	// customer panel
+	public static String show_product_query = "select * from product where status = 'Approved'";
+	
+	
+	
 }

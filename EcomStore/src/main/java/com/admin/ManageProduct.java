@@ -44,8 +44,6 @@ public class ManageProduct extends HttpServlet {
 		AdminService ads = new AdminService();
 		List<ProductDto> productlist = ads.getAllProduct();
 		request.setAttribute("pList", productlist);
-		
-		System.out.println("Product list size: " + productlist.size());
 
 		
 		RequestDispatcher rs = request.getRequestDispatcher("/admin/manage_product.jsp");

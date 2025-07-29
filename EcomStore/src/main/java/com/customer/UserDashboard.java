@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.dto.ProductDto;
 import com.service.CustomerService;
+import com.service.ProductService;
 
 @WebServlet("/user/userdashboard")
 public class UserDashboard extends HttpServlet {
@@ -17,9 +18,8 @@ public class UserDashboard extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
-		CustomerService cs1 = new CustomerService();
-		List<ProductDto> productList = cs1.showAllProduct();
+		ProductService pd1 = new ProductService();
+		List<ProductDto> productList = pd1.showAllProduct();
 		
 		request.setAttribute("pList", productList);
 		

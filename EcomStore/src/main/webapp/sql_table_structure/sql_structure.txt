@@ -6,3 +6,9 @@ CREATE TABLE product (
     price INT NOT NULL,
     img_path VARCHAR(50)
 ) AUTO_INCREMENT=1000;
+
+
+//update table by-
+
+ALTER TABLE product
+ADD COLUMN status ENUM('Approved', 'Unapproved', 'Pending') DEFAULT 'Pending';

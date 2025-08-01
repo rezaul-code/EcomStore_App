@@ -1,5 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,60 +29,80 @@
         </div>
       </div>
     </header>
-
-    <!-- Scrollable Main Content -->
-    <div class="main-wrapper">
-      <main class="main-content">
-        <div class="cart-container">
-          <h2>Your Cart</h2>
-
-          <c:if test="${empty cart_product}">
-            <p>Your cart is empty.</p>
-          </c:if>
-
-          <!-- initialize grand total -->
-          <c:set var="grandTotal" value="0" scope="page" />
-
-          <c:forEach var="item" items="${cart_product}">
-          <div class="cart-item">
-				  <img src="${pageContext.request.contextPath}/${item.p_img}" alt="${item.p_name}" width="100" />
-				
-				  <div class="item-details">
-				    <div class="row">
-				      <div class="detail"><strong>Product Name:</strong> ${item.p_name}</div>
-				      <div class="detail"><strong>Product ID:</strong> ${item.p_id}</div>
-				      <div class="detail"><strong>Quantity:</strong> ${item.quantity}</div>
-				      <div class="detail"><strong>Price:</strong> ₹${item.price}</div>
-				    </div>
-				
-				    <div class="row bottom-row">
-				      <div class="detail"><strong>Total:</strong> ₹${item.quantity * item.price}</div>
-				      <a href="remove?p_id=${item.p_id}" class="btn">Remove</a>
-				    </div>
-				  </div>
-				</div>
+    
+   
+    
 
 
-            <!-- accumulate -->
-            <c:set var="grandTotal" value="${grandTotal + (item.quantity * item.price)}" />
-          </c:forEach>
+<!-- <-- main section --> -->
+<div class="main-wrapper">
+  <main class="main-content">
+    <div class="cart-container">
+      <h2>Your Cart</h2>
 
-          <!-- summary and Buy All -->
-          <c:if test="${not empty cart_product}">
-            <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #e5e5e5; display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-              <div style="font-size: 18px; font-weight: bold;">
-                Grand Total: ₹${grandTotal}
-              </div>
-              <form action="<c:url value='/checkout' />" method="post" style="margin-top: 10px;">
-                <!-- include any required hidden fields like cart id, CSRF token etc. -->
-                <button type="submit" class="button">Buy All</button>
-              </form>
-            </div>
-          </c:if>
+      <c:if test="${empty cart_product}">
+        <p>Your cart is empty.</p>
+      </c:if>
 
-        </div>
-      </main>
+      <c:if test="${not empty cart_product}">
+        <!-- initialize grand total -->
+        <c:set var="grandTotal" value="0" scope="page" />
+
+        <table>
+          <thead>
+            <tr>
+              <th style="padding: 10px 30px;">Product</th>
+              <th style="padding: 10px 30px;">Quantity</th>
+              <th style="padding: 10px 30px;">Unit Price</th>
+              <th style="padding: 10px 30px;">Total Price</th>
+              <th style="padding: 10px 30px;">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <c:forEach var="item" items="${cart_product}">
+              <tr>
+                <td>
+                  <img src="${pageContext.request.contextPath}/${fn:escapeXml(item.p_img)}"
+                       alt="${fn:escapeXml(item.p_name)}" width="100" />
+                      <br>
+                      ${fn:escapeXml(item.p_name)}
+                      <br>
+                      <br>
+                </td>
+                
+                <input type="hidden"  ${fn:escapeXml(item.p_id)}>
+                <td>${item.quantity}</td>
+                <td>₹<fmt:formatNumber value="${item.price}" type="number" minFractionDigits="2" maxFractionDigits="2" /></td>
+				<td>₹<fmt:formatNumber value="${item.quantity * item.price}" type="number" minFractionDigits="2" maxFractionDigits="2" /></td>
+
+                  <td> <a href="remove?p_id=${item.p_id}" class="btn" style="color:black; text-decoration:none;">❌</a></td>
+              </tr>
+
+              <!-- accumulate -->
+              <c:set var="grandTotal"
+                     value="${grandTotal + (item.quantity * item.price)}" />
+            </c:forEach>
+          </tbody>
+        </table>
+
+        <!-- summary and Buy All -->
+        
+          <div style="font-size:18px; font-weight:bold;">
+			  Grand Total: ₹<fmt:formatNumber value="${grandTotal}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+			</div>
+
+          <form action="<c:url value='checkout' />" method="get" style="margin-top: 10px;">
+            <!-- include CSRF token and any necessary hidden fields here -->
+            <button type="submit" class="button">Checkout</button>
+          </form>
+      </c:if>
     </div>
+  </main>
+</div>
+
+
+
+
 
     <!-- Footer -->
     <footer>

@@ -473,8 +473,8 @@ footer {
 /* remove button styling with push to right */
 .btn {
   display: inline-block;
-  background-color: #ff4d4f;
-  color: #fff;
+  background-color: lightred;
+  color: black;
   padding: 5px 12px;
   font-size: 13px;
   font-weight: 600;

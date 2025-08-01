@@ -12,3 +12,15 @@ CREATE TABLE product (
 
 ALTER TABLE product
 ADD COLUMN status ENUM('Approved', 'Unapproved', 'Pending') DEFAULT 'Pending';
+
+
+// crate table for product insert in cart
+CREATE TABLE cart (
+    entry_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50) NOT NULL,
+    p_id INT NOT NULL,
+    quantity INT NOT NULL
+) AUTO_INCREMENT = 1000;
+
+ALTER TABLE cart
+ADD CONSTRAINT unique_product UNIQUE (p_id);

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.database_connection.DatabaseConnection;
+import com.dto.CartProductDto;
 import com.dto.ProductDto;
 
 public class ProductService {
@@ -36,6 +37,94 @@ public class ProductService {
 	}
 	
 
+	
+	public List<CartProductDto> myCartProduct(String user_name) {
+		
+		String query = QueryClass.my_cart_product;
+		List<CartProductDto> p_list = new ArrayList<CartProductDto>();
+		Connection con = DatabaseConnection.getConnection();
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, user_name);
+			ResultSet rs = ps.executeQuery();			
+			
+			while(rs.next()) {
+				
+				String name = rs.getString("user_name");
+				int p_id = rs.getInt("p_id");
+				int quantity = rs.getInt("quantity");
+				String p_name = rs.getString("p_name");
+				String p_img = rs.getString("p_img");
+				double price = rs.getDouble("price");
+
+				CartProductDto p_list2 = new CartProductDto();
+				p_list2.setUser_name(name);
+				p_list2.setP_id(p_id);
+				p_list2.setQuantity(quantity);
+				p_list2.setP_name(p_name);
+				p_list2.setP_img(p_img);
+				p_list2.setPrice(price);
+
+				p_list.add(p_list2);
+				
+
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return p_list;
+	}
+	
+	
+	
+	public int addToCart(int p_id, String user_name, int quantity) {
+		
+		int rows = 0;
+		Connection con = DatabaseConnection.getConnection();
+		String query = QueryClass.insert_to_cart;
+		String query2 = QueryClass.is_p_existIn_cart;
+		String query3 = QueryClass.update_p_quantity;
+		int newQty = quantity;
+		boolean doUpdate = false;
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query2);
+			ps.setString(1, user_name);
+			ps.setInt(2, p_id );
+			ResultSet rs =  ps.executeQuery();
+			
+			if(rs.next()) {
+				newQty= quantity + rs.getInt("quantity");
+				doUpdate = true;
+			}
+			
+			if(doUpdate) {
+				ps = con.prepareStatement(query3);
+				ps.setInt(1, newQty);
+				ps.setString(2, user_name);
+				ps.setInt(3, p_id);
+				
+				rows = ps.executeUpdate();
+				
+			}else {
+				ps = con.prepareStatement(query);
+				ps.setString(1, user_name);
+				ps.setInt(2, p_id);
+				ps.setInt(3, newQty);
+				
+				rows = ps.executeUpdate();
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rows;
+	}
+
+	
 	public List<ProductDto> showAllProduct() {
 		Connection con = DatabaseConnection.getConnection();
 		String query = QueryClass.show_product_query;
@@ -69,11 +158,9 @@ public class ProductService {
 				
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return pList;
 	}
 	
@@ -110,18 +197,13 @@ public class ProductService {
 				preparedStatement.setInt(2, id);
 				rows = preparedStatement.executeUpdate();
 				
-
 			}
-			
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return rows;
-		
 	}
-
 }

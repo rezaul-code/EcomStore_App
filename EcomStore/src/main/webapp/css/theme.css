@@ -1,0 +1,133 @@
+/* === Dark Mode Root Styles === */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Page Wrapper */
+body.dark-mode .page-wrapper {
+  background-color: #121212;
+}
+
+/* Header */
+body.dark-mode header {
+  background-color: #1e1e1e;
+  color: #f4c10f;
+}
+
+/* Header Logo */
+body.dark-mode .logo {
+  color: #f4c10f;
+}
+
+/* Footer */
+body.dark-mode footer {
+  background-color: #1e1e1e;
+  color: #ccc;
+  border-top: 1px solid #333;
+}
+
+body.dark-mode .footer-container {
+  background-color: transparent;
+}
+
+body.dark-mode .footer-section a {
+  color: #aaa;
+}
+
+body.dark-mode .footer-section a:hover {
+  color: #f4c10f;
+}
+
+body.dark-mode .footer-bottom {
+  color: #999;
+  border-top: 1px solid #333;
+}
+
+/* Main Content */
+body.dark-mode .main-content {
+  background-color: #121212;
+}
+
+/* Welcome Title */
+body.dark-mode .welcome-title {
+  color: #f4c10f;
+}
+
+/* Section Boxes (Cards) */
+body.dark-mode .section-group {
+  background-color: #1f1f1f;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .section-group h3 {
+  color: #f4c10f;
+}
+
+/* Buttons inside Cards */
+body.dark-mode .button-group a {
+  background-color: #333;
+  color: #f4c10f;
+}
+
+body.dark-mode .button-group a:hover {
+  background-color: #444;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #eee;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  z-index: 1000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode #theme-toggle {
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+
+
+body, .section-group, header, footer, .main-content {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  color: #222;
+  transition: background-color 0.3s, color 0.3s;
+  margin-left: auto;
+}
+
+/* Button on dark mode */
+body.dark-mode #theme-toggle {
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+/* Fix for Login Button in Dark Mode */
+body.dark-mode .login-form button[type="submit"] {
+  background-color: #ffbb33; /* Soft amber or orange shade */
+  color: #000;
+  font-weight: bold;
+}
+
+body.dark-mode .login-form button[type="submit"]:hover {
+  background-color: #ff9900;
+}
+
+

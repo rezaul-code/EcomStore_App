@@ -1,5 +1,6 @@
 package com.customer;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,8 +35,7 @@ public class CustomerLogin extends HttpServlet {
 			HttpSession hts = request.getSession();
 			hts.setAttribute("customer", username2);
 			
-			response.sendRedirect(request.getContextPath() + "/user/userdashboard");
-			
+			response.sendRedirect(request.getContextPath()+ "/user/userdashboard");
 		}else {
 			
 			request.getRequestDispatcher("/customer/user_login.jsp").forward(request, response);

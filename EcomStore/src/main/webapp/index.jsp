@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>EcomStore | Home</title>
-  <link rel="stylesheet" href="css/style.css" />
+ <link rel="stylesheet" href="css/style.css" />
+ <link rel="stylesheet" href="css/theme.css" />
+
 </head>
 <body>
   <div class="page-wrapper">
@@ -13,11 +15,14 @@
     <header>
       <div class="container header-container">
         <div class="logo">EcomStore</div>
+       <button id="theme-toggle">Dark Mode</button>
+
       </div>
     </header>
 
    <main class="main-content">
   <h2 class="welcome-title">Welcome to EcomStore</h2>
+ 
   <div class="main-buttons">
 
     <div class="section-group">
@@ -77,5 +82,6 @@
     </footer>
 
   </div>
+   <script src="js/theme-toggle.js"></script>
 </body>
 </html>

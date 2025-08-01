@@ -1,5 +1,6 @@
-package com.customer;
+package com.cart;
 
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,25 +10,31 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import com.dto.CartProductDto;
 import com.dto.ProductDto;
-import com.service.CustomerService;
 import com.service.ProductService;
 
-@WebServlet("/user/userdashboard")
-public class UserDashboard extends HttpServlet {
+@WebServlet("/user/user_Cart")
+public class UserCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		ProductService pd1 = new ProductService();
-		List<ProductDto> productList = pd1.showAllProduct();
+		String user_name =  (String) request.getSession().getAttribute("customer");
+		System.out.println("User in session: " + user_name);
+
 		
-		request.setAttribute("pList", productList);
+		ProductService p_obj = new ProductService();
+		List<CartProductDto> cartList = p_obj.myCartProduct(user_name);
+		
+		request.setAttribute("cart_product", cartList);
 		
 		
-		RequestDispatcher rs = request.getRequestDispatcher("/customer/user_dashbord.jsp");
+		
+		
+		RequestDispatcher  rs = request.getRequestDispatcher("/customer/user_cart.jsp");
 		rs.forward(request, response);
 	}
 
-	
 }

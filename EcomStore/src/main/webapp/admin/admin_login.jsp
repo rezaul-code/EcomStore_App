@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>Admin Login | EcomStore</title>
   <link rel="stylesheet" href="css/admin/admin-style.css">
+  <link rel="stylesheet" href="css/theme.css">
+  
 </head>
 <body>
 
@@ -14,7 +16,7 @@
     <header>
       <div class="header-container">
         <div class="logo">EcomStore</div>
-        <button id="theme-toggle" class="btn">🌙 Dark Mode</button>
+        <button id="theme-toggle">Dark Mode</button>
       </div>
     </header>
 
@@ -47,6 +49,6 @@
 
   </div>
 
-  <script src="js/theme-toggle.js"></script>
+   <script src="js/theme-toggle.js"></script>
 </body>
 </html>

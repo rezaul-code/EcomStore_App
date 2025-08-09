@@ -24,10 +24,17 @@
           </form>
         </div>
         <nav class="nav-links">
-          <a href="<c:url value='/customer/home.jsp' />">Home</a>
-          <a href="<c:url value='/customer/products.jsp' />">Products</a>
-          <a href="<c:url value='/customer/orders.jsp' />">My Orders</a>
-          <a href="<c:url value='user_Cart' />">My Cart</a>
+          <div class="account-menu">
+			  <span class="account-link">My Accounts</span>
+			  <div class="dropdown">
+			    <a href="user_profile">Profile</a>
+			    <a href="user_Cart">Cart</a>
+			    <a href="user_orders">Orders</a>
+			    <a href="user_wishlist">Wishlist</a>
+			    <a href="user_address">Address</a>
+			  </div>
+			</div>
+
           <a href="<c:url value='/logout?role=user' />">Logout</a>
         </nav>
       </div>
@@ -50,13 +57,24 @@
                   <div class="product-grid">
                     <c:forEach var="p" items="${pList}">
                       <div class="product-card">
+                      <a href="product?p_id=${p.p_id}">
                         <img src="${pageContext.request.contextPath}/${p.p_img}" alt="${p.p_name}" />
+                        </a>
                         <h3>${p.p_name}</h3>
                         <p>${p.p_description}</p>
                         <p><strong>₹ ${p.p_price}</strong></p>
+                        
                         <form action="addToCart" method="get">
                           <input type="hidden" name="p_id" value="${p.p_id}" />
                           <input type="number" name="quantity" value="1" min="1" max="99" />
+                           <br>
+                           <br>
+                           <br>
+                            <br>
+                           <br>
+                           <br>
+                           
+                        	<a href="#" class="btnn">Withlist</a>
                           <br>
                           <button type="submit">Add to Cart</button>
                         </form>

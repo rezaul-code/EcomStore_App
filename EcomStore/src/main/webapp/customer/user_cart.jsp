@@ -47,6 +47,8 @@
       <c:if test="${not empty cart_product}">
         <!-- initialize grand total -->
         <c:set var="grandTotal" value="0" scope="page" />
+        
+        <h2>${result}</h2>
 
         <table>
           <thead>
@@ -84,6 +86,7 @@
             </c:forEach>
           </tbody>
         </table>
+        
 
         <!-- summary and Buy All -->
         

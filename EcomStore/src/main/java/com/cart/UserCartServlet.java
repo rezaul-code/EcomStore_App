@@ -22,7 +22,6 @@ public class UserCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String user_name =  (String) request.getSession().getAttribute("customer");
-		System.out.println("User in session: " + user_name);
 
 		
 		ProductService p_obj = new ProductService();

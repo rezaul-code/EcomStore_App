@@ -61,7 +61,6 @@
           <a href="products.jsp">Products</a>
           <a href="about.jsp">About</a>
           <a href="contact.jsp">Contact</a>
-          <a href="logout.jsp">Logout</a>
         </nav>
         <form action="search" method="get" class="search-bar">
           <input type="text" name="query" placeholder="Search products..." />

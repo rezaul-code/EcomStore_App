@@ -24,3 +24,36 @@ CREATE TABLE cart (
 
 ALTER TABLE cart
 ADD CONSTRAINT unique_product UNIQUE (p_id);
+
+
+
+
+// table created for address
+
+CREATE TABLE address (
+    address_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    street VARCHAR(100),
+    city VARCHAR(50),
+    state VARCHAR(50),
+    postal_code VARCHAR(10),
+    country VARCHAR(50),
+    FOREIGN KEY (name) REFERENCES customer(name)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+
+
+CREATE TABLE orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    order_date DATETIME,
+    total_amount DECIMAL(10, 2),
+    payment_status VARCHAR(50),
+    shipping_address TEXT,
+    FOREIGN KEY (name) REFERENCES customer(name)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+

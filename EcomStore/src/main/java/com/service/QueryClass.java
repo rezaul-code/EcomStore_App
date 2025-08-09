@@ -33,6 +33,10 @@ public class QueryClass {
 	public static String is_p_existIn_cart = "select * from cart where user_name = ? and p_id = ?";
 	public static String update_p_quantity = "UPDATE cart SET quantity = ? WHERE user_name = ? AND p_id = ?";
 	public static String my_cart_product = "SELECT c.user_name, c.p_id, c.quantity, p.name AS p_name, p.img_path AS p_img, p.price FROM cart c JOIN product p ON c.p_id = p.id WHERE c.user_name = ?";
+	public static String remove_from_cart = "delete from cart where user_name = ? and p_id = ?";
+	public static String user_profile_query = "select * from customer where name = ? ";
+	public static String order_details = "SELECT * FROM orders WHERE name = ?";
+	public static String insert_into_address = "INSERT INTO address (name, full_name, street, city, state, postal_code, country) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	
 	
 	

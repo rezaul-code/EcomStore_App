@@ -11,12 +11,77 @@ import java.util.List;
 
 import com.database_connection.DatabaseConnection;
 import com.dto.CartProductDto;
+import com.dto.OrderDTO;
 import com.dto.ProductDto;
 
 public class ProductService {
 	
+	public List<OrderDTO> getOrdersByUsername(String username) {
+        List<OrderDTO> orders = new ArrayList<>();
+        Connection con = DatabaseConnection.getConnection();
 
+        try {
+            String sql = QueryClass.order_details;
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, username);
+
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                OrderDTO order = new OrderDTO();
+                order.setOrderId(rs.getInt("order_id"));
+                order.setName(rs.getString("name"));
+                order.setOrderDate(rs.getTimestamp("order_date"));
+                order.setTotalAmount(rs.getBigDecimal("total_amount"));
+                order.setPaymentStatus(rs.getString("payment_status"));
+                order.setShippingAddress(rs.getString("shipping_address"));
+
+                orders.add(order);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int removeProductFromCart(int p_id , String user_name) {
+		
+		int rows = 0;
+		Connection con = DatabaseConnection.getConnection();
+		String query = QueryClass.remove_from_cart;
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, user_name);
+			ps.setInt(2, p_id);
+			
+			
+			rows = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return rows;
+	}
+	
+		
 	public int updateProductStatus(int id ,String action) {
 		
 		Connection connection = DatabaseConnection.getConnection();

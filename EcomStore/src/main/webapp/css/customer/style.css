@@ -586,7 +586,7 @@ footer {
   display: grid;
   gap: 40px;
   padding: 30px 0;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 .form-grid {
   display: flex;
@@ -646,6 +646,11 @@ footer {
 }
 
 /* Order Summary */
+.summary-title2 {
+  margin-top: 100px;
+  color: green;
+}
+
 .summary-table {
   width: 100%;
   border-collapse: collapse;
@@ -701,3 +706,30 @@ footer {
   color: #555;
 }
 
+.account-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: grey;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+.account-menu:hover .dropdown {
+  display: block;
+}
+
+.account-link:hover {
+  color: #FFD700;
+  cursor: pointer;
+}
+
+.profile-card{
+	text-align: center;
+  margin-top: 50px;
+  font-size: 20px;
+}

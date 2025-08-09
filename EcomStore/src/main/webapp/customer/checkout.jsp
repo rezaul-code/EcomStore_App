@@ -33,50 +33,28 @@
    
     
 
-     <div class="main-wrapper">
-      <main class="main-content">
+   <div class="main-wrapper">
+   <main class="main-content">
+     
         <div class="checkout-container">
-          <!-- LEFT: Shipping & Payment -->
+          <!-- Right: Shipping & Payment -->
           <div class="checkout-details card">
             <h2>Checkout</h2>
 
             <section class="section">
               <h3>Shipping Address</h3>
-              <form id="checkout-form" action="<c:url value='/placeOrder'/>" method="post">
-                <input type="hidden" name="csrf_token" value="${csrfToken}" />
-                <div class="form-grid">
-                  <label class="form-group">
-                    <span>Full Name</span>
-                    <input type="text" name="shippingName" value="${shipping.name}" required />
-                  </label>
-                  <label class="form-group">
-                    <span>Address Line 1</span>
-                    <input type="text" name="address1" value="${shipping.address1}" required />
-                  </label>
-                  <label class="form-group">
-                    <span>Address Line 2 (optional)</span>
-                    <input type="text" name="address2" value="${shipping.address2}" />
-                  </label>
-                  <div class="sub-grid">
-                    <label class="form-group">
-                      <span>City</span>
-                      <input type="text" name="city" value="${shipping.city}" required />
-                    </label>
-                    <label class="form-group">
-                      <span>State</span>
-                      <input type="text" name="state" value="${shipping.state}" required />
-                    </label>
-                    <label class="form-group">
-                      <span>ZIP / PIN</span>
-                      <input type="text" name="zip" value="${shipping.zip}" required />
-                    </label>
-                  </div>
-                  <label class="form-group">
-                    <span>Phone</span>
-                    <input type="tel" name="phone" value="${shipping.phone}" required />
-                  </label>
-                </div>
-
+              
+              
+	              <select name="address_id">
+					    <c:forEach var="addr" items="${addressList}">
+					        <option value="${addr.address_id}">
+					            ${addr.full_name}, ${addr.street}, ${addr.city}, ${addr.state}, ${addr.postal_code}, ${addr.country}
+					        </option>
+					    </c:forEach>
+					</select>
+              
+                        
+             
                 <!-- Payment Method -->
                 <section class="section">
                   <h3>Payment Method</h3>
@@ -97,80 +75,88 @@
                 </section>
 
                 <input type="hidden" name="grandTotal" value="${grandTotal}" />
+                
+                
+                
+                   <!-- Left: Order Summary -->
+  <div class="summary-panel card">
+    <h3 class="summary-title">Order Summary</h3>
+    <div class="summary-wrapper">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th class="align-left">Item</th>
+            <th class="align-center">Qty</th>
+            <th class="align-right">Price</th>
+            <th class="align-right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <c:forEach var="item" items="${cart_product}">
+            <tr class="item-row">
+              <td class="item-name">${fn:escapeXml(item.p_name)}</td>
+              <td class="align-center">${item.quantity}</td>
+              <td class="align-right">
+                ₹<fmt:formatNumber value="${item.price}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+              </td>
+              <td class="align-right">
+                ₹<fmt:formatNumber value="${item.quantity * item.price}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+              </td>
+            </tr>
+          </c:forEach>
 
+          <tr class="summary-row">
+            <td colspan="3" class="align-right label">Subtotal:</td>
+            <td class="align-right value">
+              ₹<fmt:formatNumber value="${grandTotal}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+            </td>
+          </tr>
+
+          <c:if test="${not empty appliedDiscount}">
+            <tr class="summary-row">
+              <td colspan="3" class="align-right label">Discount:</td>
+              <td class="align-right discount">
+                - ₹<fmt:formatNumber value="${appliedDiscount}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+              </td>
+            </tr>
+          </c:if>
+
+          <tr class="summary-row">
+            <td colspan="3" class="align-right label">Shipping:</td>
+            <td class="align-right value">
+              ₹<fmt:formatNumber value="${shippingFee}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+            </td>
+          </tr>
+
+          <tr class="grand-total-row">
+            <td colspan="3" class="align-right label grand-label">Grand Total:</td>
+            <td class="align-right value grand-value">
+              ₹<fmt:formatNumber value="${finalTotal}" type="number" minFractionDigits="2" maxFractionDigits="2" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="terms-note">
+      By placing the order you agree to our 
+      <a href="<c:url value='/customer/terms.jsp'/>">Terms & Conditions</a>.
+    </p>
+  </div>
+     
                 <!-- Actions -->
                 <div class="actions">
+                  <a href="<c:url value='user_Cart' />" class="secondary-link">Edit Cart / Continue Shopping</a>
+                 <a href="<c:url value='userdashboard' />" class="tertiary-btn">Cancel</a>
                   <button type="submit" class="primary-btn">Place Order</button>
-                  <a href="<c:url value='/cart' />" class="secondary-link">Edit Cart / Continue Shopping</a>
-                  <button type="reset" class="tertiary-btn">Cancel</button>
                 </div>
               </form>
             </section>
           </div>
-
-          <!-- RIGHT: Order Summary -->
-          <div class="order-summary card">
-            <h3>Order Summary</h3>
-            <div class="summary-table-wrapper">
-              <table class="summary-table">
-                <thead>
-                  <tr>
-                    <th class="text-left">Item</th>
-                    <th class="text-center">Qty</th>
-                    <th class="text-right">Price</th>
-                    <th class="text-right">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <c:forEach var="item" items="${cart_product}">
-                    <tr>
-                      <td>${fn:escapeXml(item.p_name)}</td>
-                      <td class="text-center">${item.quantity}</td>
-                      <td class="text-right">
-                        ₹<fmt:formatNumber value="${item.price}" type="number" minFractionDigits="2" maxFractionDigits="2" />
-                      </td>
-                      <td class="text-right">
-                        ₹<fmt:formatNumber value="${item.quantity * item.price}" type="number" minFractionDigits="2" maxFractionDigits="2" />
-                      </td>
-                    </tr>
-                  </c:forEach>
-                  <tr class="summary-row">
-                    <td colspan="3" class="text-right font-semibold">Subtotal:</td>
-                    <td class="text-right">
-                      ₹<fmt:formatNumber value="${grandTotal}" type="number" minFractionDigits="2" maxFractionDigits="2" />
-                    </td>
-                  </tr>
-                  <c:if test="${not empty appliedDiscount}">
-                    <tr>
-                      <td colspan="3" class="text-right font-semibold">Discount:</td>
-                      <td class="text-right discount">
-                        - ₹<fmt:formatNumber value="${appliedDiscount}" type="number" minFractionDigits="2" maxFractionDigits="2" />
-                      </td>
-                    </tr>
-                  </c:if>
-                  <tr>
-                    <td colspan="3" class="text-right font-semibold">Shipping:</td>
-                    <td class="text-right">
-                      ₹<fmt:formatNumber value="${shippingFee}" type="number" minFractionDigits="2" maxFractionDigits="2" />
-                    </td>
-                  </tr>
-                  <tr class="grand-total-row">
-                    <td colspan="3" class="text-right font-bold">Grand Total:</td>
-                    <td class="text-right font-large">
-                      ₹<fmt:formatNumber value="${finalTotal}" type="number" minFractionDigits="2" maxFractionDigits="2" />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="small-note">
-              By placing the order you agree to our 
-              <a href="<c:url value='/customer/terms.jsp'/>">Terms & Conditions</a>.
-            </p>
-          </div>
-        </div>
+          
+     
+      
       </main>
-    </div>
+      </div>
 
     <!-- Footer -->
     <footer>

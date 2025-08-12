@@ -16,6 +16,34 @@ import com.dto.ProductDto;
 public class CustomerService {
 	
 	
+	public List<AddressDTO> getAddressByUsername(String username) {
+	    Connection con = DatabaseConnection.getConnection();
+	    List<AddressDTO> addressL = new ArrayList<>();
+	    String query = QueryClass.get_address_by_name; // Example: SELECT * FROM addresses WHERE username = ?
+
+	    try {
+	        PreparedStatement ps = con.prepareStatement(query);
+	        ps.setString(1, username);
+
+	        ResultSet rs = ps.executeQuery();
+	        while (rs.next()) {
+	            AddressDTO add1 = new AddressDTO();
+	            add1.setAddress_id(rs.getInt("address_id"));
+	            add1.setFull_name(rs.getString("full_name"));
+	            add1.setStreet(rs.getString("street"));
+	            add1.setCity(rs.getString("city"));
+	            add1.setState(rs.getString("state"));
+	            add1.setPostal_code(rs.getString("postal_code"));
+	            add1.setCountry(rs.getString("country"));
+	            addressL.add(add1);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return addressL;
+	}
+
+	
 	
 	public int insertUserAddress(AddressDTO address) {
 		Connection con = DatabaseConnection.getConnection();
@@ -41,19 +69,6 @@ public class CustomerService {
 		
 		return rows;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

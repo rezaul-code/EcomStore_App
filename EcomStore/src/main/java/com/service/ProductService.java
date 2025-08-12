@@ -16,25 +16,128 @@ import com.dto.ProductDto;
 
 public class ProductService {
 	
+	public int CancelOrderbyUser(String username, int order_id) {
+		
+		int rows = 0;
+		Connection con = DatabaseConnection.getConnection();
+		String sql = QueryClass.cancel_order_query;
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.setInt(2, order_id);
+			
+			rows = ps.executeUpdate();		
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rows;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public int placeOrder(String username, int addressId, String paymentMethod, double grandTotal) {
+	    Connection con = DatabaseConnection.getConnection();
+	    List<CartProductDto> cartItems = myCartProduct(username);
+	    int orderId = 0;
+
+	    try {
+	       
+	        if (cartItems.isEmpty()) {
+	            return 0;
+	        }
+
+	        con.setAutoCommit(false);
+
+	        String insertOrderSQL = QueryClass.insert_order_sql;
+	        PreparedStatement psOrder = con.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS);
+	        psOrder.setString(1, username);
+	        psOrder.setInt(2, addressId);
+	        psOrder.setString(3, paymentMethod);
+	        psOrder.setDouble(4, grandTotal);
+	        psOrder.setTimestamp(5, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
+	        psOrder.setString(6, "Pending");
+	        psOrder.executeUpdate();
+
+	        ResultSet rsKeys = psOrder.getGeneratedKeys();
+	        if (rsKeys.next()) {
+	            orderId = rsKeys.getInt(1);
+	        }
+
+	        // Insert order items
+	        String insertItemSQL = QueryClass.insert_item_sql;
+	        PreparedStatement psItem = con.prepareStatement(insertItemSQL);
+	        for (CartProductDto item : cartItems) {
+	            psItem.setInt(1, orderId);
+	            psItem.setInt(2, item.getP_id());
+	            psItem.setInt(3, item.getQuantity());
+	            psItem.setDouble(4, item.getPrice());
+	            psItem.addBatch();
+	        }
+	        psItem.executeBatch();
+
+	        // Clear the cart
+	        String clearCartSQL = QueryClass.delete_cart_item;
+	        PreparedStatement psClear = con.prepareStatement(clearCartSQL);
+	        psClear.setString(1, username);
+	        psClear.executeUpdate();
+
+	        con.commit();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        try { con.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+	        return 0;
+	    } finally {
+	        try { con.setAutoCommit(true); } catch (SQLException e) { e.printStackTrace(); }
+	    }
+
+	    return orderId;
+	}
+
+	
+	
+	
 	public List<OrderDTO> getOrdersByUsername(String username) {
+		
         List<OrderDTO> orders = new ArrayList<>();
         Connection con = DatabaseConnection.getConnection();
-
+        String sql = QueryClass.order_details;
+        
         try {
-            String sql = QueryClass.order_details;
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, username);
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, username);
 
-            ResultSet rs = stmt.executeQuery();
+            ResultSet rs = ps.executeQuery();
+            
             while (rs.next()) {
                 OrderDTO order = new OrderDTO();
-                order.setOrderId(rs.getInt("order_id"));
-                order.setName(rs.getString("name"));
-                order.setOrderDate(rs.getTimestamp("order_date"));
-                order.setTotalAmount(rs.getBigDecimal("total_amount"));
-                order.setPaymentStatus(rs.getString("payment_status"));
-                order.setShippingAddress(rs.getString("shipping_address"));
-
+                
+                order.setOrder_id(rs.getInt("order_id"));
+                order.setUsername(rs.getString("username"));
+                order.setAddress_id(rs.getString("address_id"));
+                order.setPayment_method(rs.getString("payment_method"));
+                order.setTotal_amount(rs.getBigDecimal("total_amount"));
+                order.setOrder_date(rs.getTimestamp("order_date"));
+                order.setStatus(rs.getString("status"));
+                
                 orders.add(order);
             }
         } catch (Exception e) {
@@ -43,18 +146,6 @@ public class ProductService {
 
         return orders;
     }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -94,7 +185,6 @@ public class ProductService {
 			rows = ps.executeUpdate();
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return rows ;
@@ -233,42 +323,47 @@ public class ProductService {
 	
 	
 
-	public int isertProduct(ProductDto dto) {
-		
-		Connection connection = DatabaseConnection.getConnection();
-		String product_insert_query = QueryClass.product_insert_query;
-		String product_update_query = QueryClass.product_update_query;
-		
-		int rows = 0;
-		try {
-			PreparedStatement ps = connection.prepareStatement(product_insert_query, Statement.RETURN_GENERATED_KEYS);
-			ps.setString(1, dto.getP_name());
-			ps.setString(2, dto.getP_description());
-			ps.setString(3, dto.getP_category());
-			ps.setInt(4, dto.getP_price());
-			
-			rows = ps.executeUpdate();
-			
-			//Get the generated Id
-			
-			ResultSet rs = ps.getGeneratedKeys();
-			if(rs.next()) {
-				int id = rs.getInt(1);
-				 String imgPath = "image/product/" + id + ".jpg";
-				 
-				 //Update the image path
-				PreparedStatement preparedStatement =  connection.prepareStatement(product_update_query);
-				preparedStatement.setString(1, imgPath);
-				preparedStatement.setInt(2, id);
-				rows = preparedStatement.executeUpdate();
-				
-			}
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return rows;
+	public String insertProduct(ProductDto dto) {
+	    Connection connection = DatabaseConnection.getConnection();
+	    String insert_query = QueryClass.product_insert_query;
+	    String update_query = QueryClass.product_update_query;
+
+	    try {
+	        PreparedStatement ps = connection.prepareStatement(insert_query,Statement.RETURN_GENERATED_KEYS);
+	        ps.setString(1, dto.getSellername());
+	        ps.setString(2, dto.getP_name());
+	        ps.setString(3, dto.getP_description());
+	        ps.setString(4, dto.getP_category());
+	        ps.setInt(5, dto.getP_price());
+	        ps.setString(6, "/image/product/defaul.jsp");
+	       
+	         ps.executeUpdate();
+	         
+	         ResultSet rs = ps.getGeneratedKeys();
+	         int p_id = 0;
+	         if (rs.next()) {
+	        	 p_id = rs.getInt(1);
+	         }
+	         
+	         String fileName = p_id + ".jpg";
+	         String imageRelativePath = "/image/product/" + fileName;
+	         
+	         PreparedStatement ps2 = connection.prepareStatement(update_query);
+	         ps2.setString(1, imageRelativePath);
+	         ps2.setInt(2, p_id);
+	         int sts = ps2.executeUpdate();
+	         
+	         if(sts >0) {
+	        	 return imageRelativePath;
+	         }
+	         
+	         
+	         
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
+
 }

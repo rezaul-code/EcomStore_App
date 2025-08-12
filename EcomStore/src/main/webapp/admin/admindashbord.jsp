@@ -27,9 +27,8 @@
       <div class="admin-dashboard">
         <h2>Admin Dashboard</h2>
         <div class="admin-actions">
-          <a href="manage_users.jsp">Manage Users</a>
-          <a href="manage_sellers.jsp">Manage Sellers</a>
-         <!--  <a href="/admin/manage_product">Manage Product</a>    "8080/admin/"-->
+          <a href="${pageContext.request.contextPath}/admin/manage_user">Manage Users</a>
+          <a href="${pageContext.request.contextPath}/admin/manage_seller">Manage Seller</a>
           <a href="${pageContext.request.contextPath}/admin/manage_product">Manage Product</a>
           
           <a href="view_orders.jsp">View Orders</a>

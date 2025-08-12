@@ -29,7 +29,7 @@
     <aside class="sidebar">
       <ul>
         <li><a href="<c:url value='/seller/add_product' />">Add Product</a></li>
-        <li><a href="<c:url value='/seller/view_products' />">My Products</a></li>
+        <li><a href="<c:url value='seller_view_products' />">My Products</a></li>
         <li><a href="<c:url value='/seller/orders' />">Orders</a></li>
         <li><a href="<c:url value='/seller/profile' />">Profile</a></li>
       </ul>

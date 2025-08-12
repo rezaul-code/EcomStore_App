@@ -1,4 +1,4 @@
-/* General Reset */
+/* === General Reset === */
 * {
   margin: 0;
   padding: 0;
@@ -20,7 +20,7 @@ body {
   min-height: 100vh;
 }
 
-/* Header */
+/* === Header === */
 header {
   background-color: #ffd700;
   padding: 1rem 2rem;
@@ -28,6 +28,7 @@ header {
 }
 
 .header-container {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,6 +40,23 @@ header {
   color: #333;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-actions h3 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+/* Buttons & Links */
 .btn {
   background-color: #333;
   color: #fff;
@@ -49,7 +67,7 @@ header {
 }
 
 .btn:hover {
-  background-color: #555;
+  background-color: #666;
 }
 
 .logout-btn {
@@ -60,7 +78,17 @@ header {
   background-color: darkred;
 }
 
-/* Main Content - Login and Forms */
+.header-actions .btn,
+.header-actions a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* === Main Content === */
 .main-content {
   flex: 1;
   display: flex;
@@ -113,14 +141,14 @@ form button:hover {
   background-color: #e6c200;
 }
 
-/* Message Box */
+/* === Message Box === */
 .message {
   margin-top: 1rem;
   color: red;
   text-align: center;
 }
 
-/* Dashboard Layout */
+/* === Dashboard Layout === */
 .dashboard-wrapper {
   display: flex;
   flex: 1;
@@ -171,7 +199,7 @@ form button:hover {
   color: #333;
 }
 
-/* Footer - Sticky */
+/* === Footer - Sticky === */
 footer {
   background-color: #333;
   color: #fff;
@@ -184,7 +212,7 @@ footer {
   z-index: 1000;
 }
 
-/* Focus Effects */
+/* === Focus Effects === */
 form input:focus,
 form textarea:focus {
   outline: none;
@@ -192,7 +220,7 @@ form textarea:focus {
   box-shadow: 0 0 4px #ffd700aa;
 }
 
-/* Dark Mode */
+/* === Dark Mode === */
 body.dark-mode {
   background-color: #1a1a1a;
   color: #f0f0f0;
@@ -203,24 +231,36 @@ body.dark-mode header {
   color: #ffd700;
 }
 
+body.dark-mode .logo {
+  color: #ffd700; /* yellow logo */
+}
+
+body.dark-mode h3 {
+  color: #ffd700; /* yellow h3 titles */
+}
+
+body.dark-mode h2 {
+  color: #ffd700; /* yellow h2 titles */
+}
+
 body.dark-mode .form-container,
 body.dark-mode .admin-dashboard,
 body.dark-mode .dashboard-content {
   background-color: #2b2b2b;
-  color: #fff;
+  color: #ffd700; /* yellow text */
   border: 1px solid #444;
 }
 
 body.dark-mode input,
 body.dark-mode textarea {
   background-color: #333;
-  color: #fff;
+  color: #ffd700; /* yellow input text */
   border: 1px solid #555;
 }
 
 body.dark-mode form button {
   background-color: #ffd700;
-  color: #000;
+  color: #000; /* keep black for contrast */
 }
 
 body.dark-mode .sidebar {
@@ -228,9 +268,36 @@ body.dark-mode .sidebar {
 }
 
 body.dark-mode .sidebar ul li a {
-  color: #eee;
+  color: #ffd700; /* yellow links */
 }
 
 body.dark-mode .sidebar ul li a:hover {
   background-color: #444;
+  color: #ffd700;
+}
+
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.order-table th, .order-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.order-table th {
+    background-color: #f4f4f4;
+}
+
+.product-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
 }

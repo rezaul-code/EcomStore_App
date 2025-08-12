@@ -1,15 +1,29 @@
 package com.dto;
 
 public class SellerDTO {
-
+	
+	int id;
 	String name;
 	String email;
 	String password;
 	String shop_name;
 	String phone;
 	String address;
+	String approved;
 	
 	
+	public String getApproved() {
+		return approved;
+	}
+	public void setApproved(String approved) {
+		this.approved = approved;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -46,7 +60,7 @@ public class SellerDTO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	
+
 	
 	
 }

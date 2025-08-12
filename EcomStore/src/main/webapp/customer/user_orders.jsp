@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,56 +41,65 @@
         </nav>
       </div>
     </header>
+    
+    
+    
+    
+    
+    
+    
+    
 
     <!-- Scrollable Main Content -->
     <div class="main-wrapper">
       <main class="main-content">
-        <div class="container">
-          <div class="dashboard-box">
-            <div class="product-section">
-              <h2>Explore Our Products</h2>
-              <c:choose>
-                <c:when test="${empty pList}">
-                  <p style="text-align:center; font-size:18px;">
-                    No products available right now. Please check back later.
-                  </p>
-                </c:when>
-                <c:otherwise>
-                  <div class="product-grid">
-                    <c:forEach var="p" items="${pList}">
-                      <div class="product-card">
-                      <a href="product?p_id=${p.p_id}">
-                        <img src="${pageContext.request.contextPath}/${p.p_img}" alt="${p.p_name}" />
-                        </a>
-                        <h3>${p.p_name}</h3>
-                        <p>${p.p_description}</p>
-                        <p><strong>₹ ${p.p_price}</strong></p>
-                        
-                        <form action="addToCart" method="get">
-                          <input type="hidden" name="p_id" value="${p.p_id}" />
-                          <input type="number" name="quantity" value="1" min="1" max="99" />
-                           <br>
-                          
-                           
-                        	<a href="#" class="btnn">Withlist</a>
-                          <br>
-                          <button type="submit">Add to Cart</button>
-                        </form>
-                        <c:if test="${not empty msg}">
-                          <div style="margin-top:8px; font-size:14px; color:green;">
-                            ${msg}
-                          </div>
-                        </c:if>
-                      </div>
-                    </c:forEach>
-                  </div>
-                </c:otherwise>
-              </c:choose>
-            </div>
-          </div>
-        </div>
-      </main>
+  <h2>Your Orders</h2>
+
+  <c:if test="${empty orderDetails}">
+    <p>You haven't placed any orders yet.</p>
+  </c:if>
+
+  <c:if test="${not empty orderDetails}">
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Date</th>
+          <th>Payment Method</th>
+          <th>Total Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach var="order" items="${orderDetails}">
+          <tr>
+            <td>${order.order_id}</td>
+            <td>
+              <fmt:formatDate value="${order.order_date}" pattern="dd-MMM-yyyy HH:mm" />
+            </td>
+            <td>${order.payment_method}</td>
+            <td>₹${order.total_amount}</td>
+            <td>${order.status}</td>
+            <td><a href="cancel_order?id=${order.order_id}" class="btn">Cancel order</a></td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
+    <h2>${status}</h2>
+  </c:if>
+  
+</main>
+
     </div>
+    
+    
+    
+    
+    
+    
+    
+    
 
     <!-- Footer -->
     <footer>

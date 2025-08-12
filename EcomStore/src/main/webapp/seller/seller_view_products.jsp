@@ -1,5 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +19,8 @@
   <header>
     <div class="header-container">
       <div class="logo">EcomStore</div>
-      
-      <h2>Welcome ${seller}</h2>
       <div class="header-actions">
-      
+      <h3>Welcome ${seller}</h3>
         <button id="theme-toggle" class="btn">🌙 Dark Mode</button>
         <a href="<c:url value='/logout?role=seller' />" class="btn logout-btn">Logout</a>
       </div>
@@ -36,9 +38,43 @@
       </ul>
     </aside>
 
-    <main class="dashboard-content">
-      <h2>Welcome, ${sellerName}!</h2>
-      <p>This is your seller dashboard. Use the menu to manage your products, view orders, and update your profile.</p>
+     <main class="dashboard-content">
+      <h2>My Products</h2>
+
+      <c:choose>
+        <c:when test="${not empty productList}">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <c:forEach var="p" items="${productList}">
+                <tr>
+                  <td>${p.p_id}</td>
+                  <td><img src="<c:url value='/${p.p_img}' />" alt="Product Image"></td>
+                  <td>${p.p_name}</td>
+                  <td>${p.p_description}</td>
+                  <td>${p.p_category}</td>
+                  <td>₹${p.p_price}</td>
+                  <td>${p.p_status}</td>
+                </tr>
+              </c:forEach>
+            </tbody>
+          </table>
+        </c:when>
+        <c:otherwise>
+          <p class="no-data">No products found.</p>
+        </c:otherwise>
+      </c:choose>
+   
     </main>
   </div>
 

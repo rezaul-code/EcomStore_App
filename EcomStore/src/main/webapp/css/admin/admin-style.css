@@ -230,3 +230,19 @@ footer {
   background-color: #3e5a70;
 }
 
+.seller-table {
+  width: 100%;
+  border-collapse: collapse; /* Merge borders for a clean look */
+}
+
+.seller-table th,
+.seller-table td {
+  border: 1px solid #ccc; /* Border on all sides */
+  padding: 8px;
+  text-align: left;
+}
+
+.seller-table th {
+  background-color: #f4f4f4; /* Optional: Header background */
+}
+

@@ -2,6 +2,7 @@ package com.dto;
 
 public class ProductDto {
 	
+	String sellername;
 	int p_id;
 	String p_name;
 	String p_description;
@@ -10,6 +11,13 @@ public class ProductDto {
 	String p_img;
 	String p_status;
 	
+	
+	public String getSellername() {
+		return sellername;
+	}
+	public void setSellername(String sellername) {
+		this.sellername = sellername;
+	}
 	public String getP_status() {
 		return p_status;
 	}

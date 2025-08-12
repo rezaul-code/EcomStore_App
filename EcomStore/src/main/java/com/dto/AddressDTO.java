@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AddressDTO {
 
-	
+	int address_id;
 	String name;
 	String full_name;
 	String street;
@@ -12,6 +12,16 @@ public class AddressDTO {
 	String state;
 	String postal_code;
 	String country;
+	
+	
+	
+	public int getAddress_id() {
+		return address_id;
+	}
+	public void setAddress_id(int address_id) {
+		this.address_id = address_id;
+	}
+	
 	
 	
 	public String getCountry() {
@@ -55,10 +65,6 @@ public class AddressDTO {
 	}
 	public void setPostal_code(String postal_code) {
 		this.postal_code = postal_code;
-	}
-	public static List<AddressDTO> getAddressesByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	

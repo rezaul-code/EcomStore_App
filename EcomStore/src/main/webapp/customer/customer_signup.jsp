@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Customer Sign Up | EcomStore</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customer/style.css">
+  <link rel="stylesheet" href="css/theme.css" />
 </head>
 <body>
   <div class="page-wrapper">
@@ -25,6 +26,7 @@
           <input type="text" name="query" placeholder="Search products..." />
           <button type="submit">🔍</button>
         </form>
+        <button id="theme-toggle">Dark Mode</button>
       </div>
     </header>
 
@@ -72,5 +74,6 @@
     </footer>
     
   </div>
+   <script src="js/theme-toggle.js"></script>
 </body>
 </html>

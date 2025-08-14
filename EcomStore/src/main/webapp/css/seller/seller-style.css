@@ -301,3 +301,58 @@ body.dark-mode .sidebar ul li a:hover {
     object-fit: cover;
     border-radius: 5px;
 }
+
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Header Styling */
+table thead {
+    background: #f4f6f8;
+}
+table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Body Styling */
+table td {
+    padding: 12px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #555;
+}
+
+/* Row Hover Effect */
+table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+/* Image Styling */
+table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* No Data Message */
+.no-data {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+}
+

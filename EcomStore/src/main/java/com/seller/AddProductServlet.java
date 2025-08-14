@@ -55,7 +55,9 @@ public class AddProductServlet extends HttpServlet {
 			uploadPath = "E:\\Ecomerce\\EcomStore_App\\EcomStore\\src\\main\\webapp\\" +imageRelativePath;
 			p_image.write(uploadPath);
 		}else {
-			request.setAttribute("Message", "image uploading failed !!");
+			
+			String uploadPath = "E:\\Ecomerce\\EcomStore_App\\EcomStore\\src\\main\\webapp\\image\\product\\default.jpg";
+//			request.setAttribute("Message", "image uploading failed !!");
 		}
 		
 		

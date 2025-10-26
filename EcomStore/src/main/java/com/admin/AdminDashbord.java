@@ -17,5 +17,7 @@ public class AdminDashbord extends HttpServlet {
 		RequestDispatcher  rs = request.getRequestDispatcher("/admin/admindashbord.jsp");
 		rs.forward(request, response);
 	}
+	
+	//single line comment
 
 }

@@ -18,7 +18,7 @@ public class DatabaseConnection {
 
     private static final String PASSWORD = System.getenv("MYSQLPASSWORD") != null 
             ? System.getenv("MYSQLPASSWORD") 
-            : "your_password";
+            : "rootonline";
 
     public static Connection getConnection() {
         Connection con = null;

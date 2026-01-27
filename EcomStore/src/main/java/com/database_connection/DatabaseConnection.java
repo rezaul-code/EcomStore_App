@@ -6,11 +6,10 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    // On Railway, these values are usually provided via Environment Variables
-    // You can find these in your Railway Dashboard under the 'Variables' tab
+    // Added "jdbc:" prefix to the Railway URL
     private static final String DB_URL = System.getenv("MYSQL_URL") != null 
-            ? System.getenv("MYSQL_URL") 
-            : "mysql://root:jHwpEfHIjfmgpuEallkQFKflQUXXjPBG@mysql.railway.internal:3306/railway"; // Replace with your actual Railway URL
+            ? "jdbc:" + System.getenv("MYSQL_URL") 
+            : "jdbc:mysql://root:jHwpEfHIjfmgpuEallkQFKflQUXXjPBG@mysql.railway.internal:3306/railway"; 
 
     private static final String USERNAME = System.getenv("MYSQLUSER") != null 
             ? System.getenv("MYSQLUSER") 
@@ -23,6 +22,7 @@ public class DatabaseConnection {
     public static Connection getConnection() {
         Connection con = null;
         try {
+            // Ensure you have the mysql-connector-j dependency in your pom.xml
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             System.out.println("Connected to Railway MySQL successfully!");
@@ -30,7 +30,8 @@ public class DatabaseConnection {
             System.err.println("MySQL JDBC Driver not found.");
             e.printStackTrace();
         } catch (SQLException e) {
-            System.err.println("Connection failed. Check your Railway credentials and Whitelist (if applicable).");
+            // This will help you see the exact error if the credentials fail
+            System.err.println("SQL Exception: " + e.getMessage());
             e.printStackTrace();
         }
         return con;
